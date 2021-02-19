@@ -16,12 +16,14 @@ public class MainActivity extends AppCompatActivity {
         Button startButton = findViewById(R.id.startButton);
         Button exitButton = findViewById(R.id.exitButton);
 
+        // Запускаем нашу игровую активность
         startButton.setOnClickListener(v -> {
             Intent intent = new Intent(this, GameActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
         });
 
+        // Выходим из приложения
         exitButton.setOnClickListener(v -> System.exit(1));
     }
 }

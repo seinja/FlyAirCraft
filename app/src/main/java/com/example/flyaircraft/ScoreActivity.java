@@ -15,6 +15,7 @@ public class ScoreActivity extends AppCompatActivity {
 
         Button restartButton = findViewById(R.id.restartButton);
 
+        // Перезапуск нашей начальной активности
         restartButton.setOnClickListener(v -> {
             Intent intent = new Intent(this, GameActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

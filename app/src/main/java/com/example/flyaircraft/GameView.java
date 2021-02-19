@@ -21,17 +21,26 @@ public class GameView extends View implements SensorEventListener {
 
 
 
+    // Конструктор класс
     public GameView(Context context) {
         super(context);
+        // Работа с кистью(выбор цвета и т.д)
         Paint paint = new Paint();
         paint.setColor(Color.YELLOW);
         paint.setTextSize(34);
+
+        // Инициализация сенсрменеджера и самого сенсора типа акселерометр
         SensorManager sensorManager = (SensorManager) getContext().getSystemService(Context.SENSOR_SERVICE);
         Sensor sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        // Добавляем в сенсорменеджер наш сенсор акселерометр
         sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_GAME);
+
+        // Устанавливаем начальное положение игрока
         airCraft.setPosition(getWidth() >> 1, (float) (getHeight()* 0.9));
     }
 
+
+    // Отрисовка игрока на игровыом поле и игровое поле соответственно
     @SuppressLint("DrawAllocation")
     @Override
     protected void onDraw(Canvas canvas) {
@@ -41,9 +50,12 @@ public class GameView extends View implements SensorEventListener {
         }
         canvas.drawColor(Color.rgb(0, 255, 247));
         airCraft.onDraw(canvas);
+        // Перерисовка
         invalidate();
     }
 
+
+    // Функция реагирующая на нажатие на экран левее середины переход к очкам, правее на начальную активность
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -63,12 +75,17 @@ public class GameView extends View implements SensorEventListener {
         return super.onTouchEvent(event);
     }
 
+
+    // Функция изменения положения нашего сенсора акселерометра
     @Override
     public void onSensorChanged(SensorEvent event) {
+        // создаём обект сенсора и присваем ему сенсор который на передают
         Sensor mySensor = event.sensor;
+        // Проверяем если тип сенсора акселерометр то берем переменную x в кординатак акселерометра
         if(mySensor.getType() == Sensor.TYPE_ACCELEROMETER){
             float x = event.values[0];
 
+            // Если нахлон больше установленных значений до передвигаем нашего игрока в направлении наклона
             if(x != .5f && x != -.5f){
                 if(airCraft.getX() > 0 && airCraft.getX() < getWidth()){
                     airCraft.moveAir(-x);
@@ -83,6 +100,7 @@ public class GameView extends View implements SensorEventListener {
         }
     }
 
+    // Функция изменения точности(пока не требуеться)
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
