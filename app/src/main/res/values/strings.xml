@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">FlyAirCraft</string>
+    <string name="titleText">Fly aircraft</string>
+    <string name="start">Start</string>
+    <string name="exit">Exit</string>
+    <string name="restart">Restart</string>
+    <string name="score_is">Score is :</string>
+    <string name="previous_score">Previous score</string>
 </resources>
