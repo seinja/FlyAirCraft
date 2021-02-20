@@ -6,12 +6,17 @@ import android.graphics.Paint;
 
 import com.example.flyaircraft.AirCraft;
 
+
+// Класс пули
 public class Bullet {
+
+    // Кординаты и кисть
     private float x;
     private float y;
     private final Paint paint = new Paint();
 
 
+    // Инциализация полей
     public Bullet(float x, float y) {
         this.x = x;
         this.y = y;
@@ -19,11 +24,14 @@ public class Bullet {
 
     }
 
+
+    // Отрисовка пули
     public void onDraw(Canvas canvas) {
         int radius = 25;
         canvas.drawCircle(this.x, this.y, radius, paint);
     }
 
+    // Перемещение пули в простаранстве вверх
     public void fly(AirCraft airCraft) {
         if (y > 0) {
             double bulletSpeed = 30;
@@ -33,6 +41,5 @@ public class Bullet {
             y = airCraft.getY();
         }
     }
-
 
 }

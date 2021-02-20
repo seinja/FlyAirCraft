@@ -13,13 +13,18 @@ public class AirCraft {
     private float x;
     private float y;
     private final Paint paint = new Paint();
+
+    // Наше изображение самолёта
     private final Bitmap character;
+    // Пуля соответсвенно т.к летит она от игрока
     private final Bullet bullet;
 
     // Конструктор с установкой цвета нашего коробля
     public AirCraft(Context context) {
         paint.setColor(Color.BLACK);
+        // Реализация ещё не сжатого изображения
         Bitmap source = BitmapFactory.decodeResource(context.getResources(), R.drawable.some);
+        // Соотвественно тоже изображение меньше в 10 раз
         character = Bitmap.createScaledBitmap(source, source.getWidth() / 10, source.getHeight() / 10, false);
 
         bullet = new Bullet(x, y);
