@@ -11,6 +11,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -103,8 +104,10 @@ public class GameView extends View implements SensorEventListener {
                 } else {
                     if (airCraft.getX() < 0) {
                         airCraft.setPosition(airCraft.getX() + 5);
-                    } else {
-                        airCraft.setPosition(airCraft.getX() - 5);
+                        // Todo баг с перемещением решить вопрос
+                    } else if (airCraft.getX()+800f > 1100) {
+                        Log.d("X:", String.valueOf(airCraft.getX()));
+                        airCraft.setPosition(airCraft.getX() - 120);
                     }
                 }
             }
