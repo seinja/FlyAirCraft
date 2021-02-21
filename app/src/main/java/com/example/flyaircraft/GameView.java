@@ -15,12 +15,14 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.example.flyaircraft.Objects.Background;
 import com.example.flyaircraft.Objects.Clouds;
 
 public class GameView extends View implements SensorEventListener {
     private final AirCraft airCraft;
     private boolean isInit = false;
     private final Clouds[] clouds = new Clouds[2];
+    private Background background;
 
 
     // Конструктор класс
@@ -41,6 +43,8 @@ public class GameView extends View implements SensorEventListener {
         clouds[1] = new Clouds(context);
         clouds[1].setPos(450, 100);
 
+        background = new Background(context);
+
         // Устанавливаем начальное положение игрока
         airCraft = new AirCraft(context);
         airCraft.setPosition(getWidth() >> 1, (float) (getHeight() * 0.9));
@@ -56,7 +60,7 @@ public class GameView extends View implements SensorEventListener {
             airCraft.setPosition(getWidth() >> 1, (float) (getHeight() * 0.85));
             isInit = true;
         }
-        canvas.drawColor(Color.rgb(0, 255, 247));
+        background.onDraw(canvas);
         for (Clouds cloud : clouds) {
             cloud.onDraw(canvas);
         }
@@ -104,10 +108,10 @@ public class GameView extends View implements SensorEventListener {
                 } else {
                     if (airCraft.getX() < 0) {
                         airCraft.setPosition(airCraft.getX() + 5);
-                        // Todo баг с перемещением решить вопрос
-                    } else if (airCraft.getX()+800f > 1100) {
+                        // Todo баг с перемещением решить вопрос перемещветься за границы экрана
+                    } else{
                         Log.d("X:", String.valueOf(airCraft.getX()));
-                        airCraft.setPosition(airCraft.getX() - 120);
+                        airCraft.setPosition(airCraft.getX() - 220);
                     }
                 }
             }

@@ -59,6 +59,7 @@ public class AirCraft {
     public float getX() {
         return this.x;
     }
+    public float getXBitmap(){ return this.x + 2000;}
 
     public float getY() {
         return this.y;
