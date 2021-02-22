@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 
 import com.example.flyaircraft.Objects.Bullet;
+import com.example.flyaircraft.Objects.CollisionObject;
 
 public class AirCraft {
     private float x;
@@ -59,7 +60,7 @@ public class AirCraft {
     public float getX() {
         return this.x;
     }
-    public float getXBitmap(){ return this.x + 2000;}
+    public float getXBitmap(){ return this.x + character.getWidth();}
 
     public float getY() {
         return this.y;

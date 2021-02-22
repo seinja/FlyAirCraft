@@ -8,7 +8,7 @@ import com.example.flyaircraft.AirCraft;
 
 
 // Класс пули
-public class Bullet {
+public class Bullet extends CollisionObject {
 
     // Кординаты и кисть
     private float x;
@@ -18,6 +18,7 @@ public class Bullet {
 
     // Инциализация полей
     public Bullet(float x, float y) {
+        super(x,y,25f);
         this.x = x;
         this.y = y;
         paint.setColor(Color.YELLOW);

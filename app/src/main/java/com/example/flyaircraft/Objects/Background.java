@@ -1,5 +1,6 @@
 package com.example.flyaircraft.Objects;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -20,7 +21,7 @@ public class Background {
     }
 
     public void onDraw(Canvas canvas){
-        Paint paint = new Paint();
+        @SuppressLint("DrawAllocation") Paint paint = new Paint();
         canvas.drawBitmap(origin,0,0,paint);
 
     }

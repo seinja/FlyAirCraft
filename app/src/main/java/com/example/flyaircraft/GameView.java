@@ -21,8 +21,10 @@ import com.example.flyaircraft.Objects.Clouds;
 public class GameView extends View implements SensorEventListener {
     private final AirCraft airCraft;
     private boolean isInit = false;
+    private boolean isScoreTimerON = false;
     private final Clouds[] clouds = new Clouds[2];
     private Background background;
+    private Score score;
 
 
     // Конструктор класс
@@ -42,12 +44,17 @@ public class GameView extends View implements SensorEventListener {
         clouds[0].setPos(12, 12);
         clouds[1] = new Clouds(context);
         clouds[1].setPos(450, 100);
-
+        score = new Score();
         background = new Background(context);
 
         // Устанавливаем начальное положение игрока
         airCraft = new AirCraft(context);
         airCraft.setPosition(getWidth() >> 1, (float) (getHeight() * 0.9));
+
+
+
+
+
 
     }
 
@@ -65,6 +72,22 @@ public class GameView extends View implements SensorEventListener {
             cloud.onDraw(canvas);
         }
         airCraft.onDraw(canvas);
+        score.onDraw(canvas);
+
+        if(!isScoreTimerON){
+            Runnable runnable = () -> {
+                try {
+                    score.addScore(1);
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            };
+            Thread thread = new Thread(runnable);
+            thread.start();
+            isScoreTimerON = score.getScore() % 2 == 0;
+        }
+
 
         // Перерисовка
         invalidate();
@@ -123,5 +146,7 @@ public class GameView extends View implements SensorEventListener {
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
     }
+
+
 
 }
