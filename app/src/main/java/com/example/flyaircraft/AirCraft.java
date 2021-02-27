@@ -66,5 +66,9 @@ public class AirCraft {
         return this.y;
     }
 
+    public Bullet getBullet(){
+        return bullet;
+    }
+
 
 }

@@ -17,14 +17,17 @@ import android.view.View;
 
 import com.example.flyaircraft.Objects.Background;
 import com.example.flyaircraft.Objects.Clouds;
+import com.example.flyaircraft.Objects.Obstacle;
 
 public class GameView extends View implements SensorEventListener {
     private final AirCraft airCraft;
     private boolean isInit = false;
     private boolean isScoreTimerON = false;
     private final Clouds[] clouds = new Clouds[2];
-    private Background background;
-    private Score score;
+    private final Background background;
+    private final Score score;
+    private Obstacle obsOne;
+
 
 
     // Конструктор класс
@@ -45,6 +48,7 @@ public class GameView extends View implements SensorEventListener {
         clouds[1] = new Clouds(context);
         clouds[1].setPos(450, 100);
         score = new Score();
+        obsOne = new Obstacle(50);
         background = new Background(context);
 
         // Устанавливаем начальное положение игрока
@@ -73,21 +77,12 @@ public class GameView extends View implements SensorEventListener {
         }
         airCraft.onDraw(canvas);
         score.onDraw(canvas);
+        obsOne.onDraw(canvas);
 
-        if(!isScoreTimerON){
-            Runnable runnable = () -> {
-                try {
-                    score.addScore(1);
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            };
-            Thread thread = new Thread(runnable);
-            thread.start();
-            isScoreTimerON = score.getScore() % 2 == 0;
+        if(obsOne.onCollisionEnter(airCraft.getBullet())){
+            obsOne.setPos();
+            score.addScore(10);
         }
-
 
         // Перерисовка
         invalidate();

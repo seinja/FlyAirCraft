@@ -6,15 +6,19 @@ public abstract class CollisionObject implements Collision {
     protected float size;
 
 
-    public CollisionObject(float x, float y,  float size){
+    public CollisionObject(float x, float y, float size) {
         this.size = size;
         this.x = x;
         this.y = y;
     }
 
+    public CollisionObject(int size) {
+        this.size = size;
+    }
+
     @Override
     public boolean onCollisionEnter(CollisionObject object) {
-        return object.x < object.x + object.size && object.x > object.x- object.size &&
-                object.y < object.y + object.size && object.y > object.y - object.size;
+        return this.x - size < object.x - object.size && this.x + size > object.x + object.size &&
+                this.y + size < object.y + object.size && this.y - size > object.y - object.size;
     }
 }
